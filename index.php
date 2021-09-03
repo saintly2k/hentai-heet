@@ -1,7 +1,6 @@
 <?php
 
 require_once("config.php");
-require_once("mcfg.php");
 
 $conn=mysqli_connect($host,$username,$password,"$dbname");
 if(!$conn)

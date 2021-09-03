@@ -12,7 +12,6 @@ $tags = $_GET["tags"];
 $description = $_GET["description"];
 
 require_once("config.php");
-require_once("mcfg.php");
 
 ?>
 
