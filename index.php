@@ -124,6 +124,13 @@ if (mysqli_num_rows($result) > 0) {
                                     <path
                                         d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z" />
                                 </svg> Translation</td>
+                            <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-exclamation-square" viewBox="0 0 16 16">
+                                    <path
+                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                    <path
+                                        d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                                </svg> Actions</td>
                         </tr>
                         <?php
 $i=0;
@@ -133,16 +140,37 @@ while($row = mysqli_fetch_array($result)) {
                             <td><a
                                     href="hentai.php?id=<?php echo $row['hentai_id']; ?>&hentai=<?php echo $row['hentai_title']; ?>&year=<?php echo $row['hentai_year']; ?>&quality=<?php echo $row['hentai_quality']; ?>&group=<?php echo $row['hentai_group']; ?>&studios=<?php echo $row['hentai_studios']; ?>&cover=<?php echo $row['hentai_cover']; ?>&file=<?php echo $row['hentai_file']; ?>&tags=<?php echo $row['hentai_tags']; ?>&description=<?php echo $row['hentai_description']; ?>"><?php echo $row["hentai_title"]; ?></a>
                             </td>
+                            <input style="display: none;"
+                                value='<?php echo $hentai_file; ?>?id=<?php echo $row['hentai_id']; ?>&hentai=<?php echo $row['hentai_title']; ?>&year=<?php echo $row['hentai_year']; ?>&quality=<?php echo $row['hentai_quality']; ?>&group=<?php echo $row['hentai_group']; ?>&studios=<?php echo $row['hentai_studios']; ?>&cover=<?php echo $row['hentai_cover']; ?>&file=<?php echo $row['hentai_file']; ?>&tags=<?php echo $row['hentai_tags']; ?>&description=<?php echo $row['hentai_description']; ?>"><?php echo $row["hentai_title"]; ?>'
+                                id="full_hentai_link">
                             <td><?php echo $row["hentai_year"]; ?></td>
                             <td><?php echo $row["hentai_quality"]; ?></td>
                             <td><?php echo $row["hentai_studios"]; ?></td>
                             <td><?php echo $row["hentai_group"]; ?></td>
+                            <td><a href="<?php echo $row["hentai_share"]; ?>"><button
+                                        onclick="copyHID<?php echo $row['hentai_id']; ?>()"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                                            <path
+                                                d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
+                                        </svg></button></a></td>
+
+                            <script>
+                            function copyHID<?php echo $row['hentai_id']; ?>() {
+                                var hLink = document.getElementById("full_hentai_link");
+                                hLink.select();
+                                hLink.setSelectionRange(0, 99999); /* For mobile devices */
+                                navigator.clipboard.writeText(hLink.value);
+                                alert("Copied the text: " + hLink.value);
+                            }
+                            </script>
                         </tr>
                         <?php
 $i++;
 }
 ?>
                     </table>
+
                     <?php
 }
 else{

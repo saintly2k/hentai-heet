@@ -9,6 +9,8 @@ $dbname = "h33t_hentai"; //Database Name
 //For Page Title
 $page_title = "Hentai | The H33T.moe Project";
 $page_title_link = "index.php";
+$hentai_file = "http://localhost/h33t/h/v2/hentai.php";
+//$hentai_file = "https://h.h33t.moe/hentai.php";
 
 //Other Important Variables
 $watch_hentai = " | The H33T.moe Project";
